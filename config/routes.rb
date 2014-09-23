@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  post 'page/create', to: 'site#create'
+
+  get 'page/:id' => 'site#show', as: :page
+
+  root 'site#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
