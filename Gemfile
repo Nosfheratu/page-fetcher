@@ -45,3 +45,4 @@ end
 
 gem 'haml-rails'
 gem 'foundation-rails', '5.4.3.1'
+gem "koala", "~> 1.10.0rc"
