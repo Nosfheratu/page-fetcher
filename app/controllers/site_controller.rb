@@ -13,9 +13,9 @@ class SiteController < ApplicationController
 
     respond_to do |format|
       if @page.save
-        format.html { redirect_to root_path, notice: 'Facebook Page found and saved!' }
+        format.html { redirect_to root_path, notice: 'Facebook Page found and saved yay!' }
       else
-        format.html { redirect_to root_path, alert: 'Ooops! Page not found! :(' }
+        format.html { redirect_to root_path, alert: 'Ooops! Page already saved or not found! :(' }
       end
     end
   end

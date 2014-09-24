@@ -1,29 +1,36 @@
-.row
-  .large-2.columns
-    = image_tag @page.facebook_page_image_url
-  .large-10.columns
-    %h2
-      = @page.name
+- content_for :title do
+  = "#{@page.name}'s feed"
 
 .row
-  .large-12.columns
+  .large-9.columns.large-centered
+    .row
+      .large-1.columns
+        = image_tag @page.facebook_page_image_url
+      .large-11.columns
+        %h3
+          = @page.name
+
+.row{ style: 'padding-top: 50px;' }
+  .large-9.columns.large-centered
     - @feed.each_with_index do |item, index|
       .row
         .large-12.columns
-          %h3
+          %b
             = item['from']['name']
       .row
         - if item['picture']
-          .large-3.columns
-            = image_tag item['picture']
-          .large-9.columns
-            %p
+          .large-2.columns.small-3
+            = image_tag item['picture'], size: '80'
+          .large-10.columns
+            %p.text-justify
               = item['message']
         - else
           .large-12.columns
-            %p
+            %p.text-justify
               = item['message']
       .row
         .large-12.columns
           %p
             = "#{ time_ago_in_words item['created_time'] } ago"
+
+%br
