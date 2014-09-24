@@ -1,0 +1,29 @@
+.row
+  .large-2.columns
+    = image_tag @page.facebook_page_image_url
+  .large-10.columns
+    %h2
+      = @page.name
+
+.row
+  .large-12.columns
+    - @feed.each_with_index do |item, index|
+      .row
+        .large-12.columns
+          %h3
+            = item['from']['name']
+      .row
+        - if item['picture']
+          .large-3.columns
+            = image_tag item['picture']
+          .large-9.columns
+            %p
+              = item['message']
+        - else
+          .large-12.columns
+            %p
+              = item['message']
+      .row
+        .large-12.columns
+          %p
+            = "#{ time_ago_in_words item['created_time'] } ago"
