@@ -3,7 +3,9 @@ class Page < ActiveRecord::Base
   validates :facebook_page_id, uniqueness: true
 
   def set_fb_page_data facebook_id
-    graph = Koala::Facebook::API.new ENV['FB_ACCESS_TOKEN']
+    auth = Koala::Facebook::OAuth.new ENV['FB_APP_ID'], ENV['FB_SECRET']
+    token = auth.get_app_access_token
+    graph = Koala::Facebook::API.new token
 
     begin
       page = graph.get_object facebook_id
@@ -19,7 +21,9 @@ class Page < ActiveRecord::Base
   end
 
   def get_feed
-    graph = Koala::Facebook::API.new ENV['FB_ACCESS_TOKEN']
+    auth = Koala::Facebook::OAuth.new ENV['FB_APP_ID'], ENV['FB_SECRET']
+    token = auth.get_app_access_token
+    graph = Koala::Facebook::API.new token
 
     graph.get_connections(self.facebook_page_id, 'feed?limit=10')
   end
